@@ -15,7 +15,7 @@ external_components:
 esphome:
   name: ${device_name}
   min_version: 2023.3.0
-  friendly_name: ${humanly_name}
+  #friendly_name: ${humanly_name}
   on_boot:
     priority: -100
     then:
