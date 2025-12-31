@@ -1,8 +1,8 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# # # # #                                   NICHT BEARBEITEN!!                                  # # # # #
+# # # # #                                   DO NOT EDIT!!                                  # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# Компонент климата
+# Climate component
 external_components:
   - source:
       url: https://github.com/I-am-nightingale/tclac.git
@@ -11,11 +11,11 @@ external_components:
     components: [ tclac ]
     refresh: 30s
 
-# Конфигурация ESPHome
+# ESPHome Configuration
 esphome:
   name: ${device_name}
   min_version: 2023.3.0
-  #friendly_name: ${humanly_name}
+  #friendly_name: ${humanly_name} #I removed this because I don't like how it names my devices. If you want a friendly name, add it in the main config
   on_boot:
     priority: -100
     then:
@@ -118,17 +118,17 @@ captive_portal:
 
 
 # # # # # # # # # # # # # # # # # # # # # # #
-# # # # #     НЕ РЕДАКТИРОВАТЬ!     # # # # #
+# # # # #     DO NOT EDIT!     # # # # #
 # # # # # # # # # # # # # # # # # # # # # # #
 
-# ОБЯЗАТЕЛЬНО отключаем логгирование через UART
+# It is ESSENTIAL to disable logging via UART
 logger:
   baud_rate: 0
 
-# Раздел настроек устройства:
-# - Переключатели
+# Device settings section:
+# - Switches
 switch:
-  # Пищалка для подтверждения команд, по умолчанию выключена
+  # The beeper for confirming commands is turned off by default.
   - name: Beeper
     platform: template
     device_class: switch
@@ -145,7 +145,7 @@ switch:
         lambda: !lambda |-
           id(${device_name}climate).set_beeper_state(false);
   
-  # Индикатор уставки температуры на корпусе внутреннего блока, по умолчанию включен
+  # The temperature setting indicator on the indoor unit's casing is enabled by default.
   - name: Display
     platform: template
     device_class: switch
@@ -162,7 +162,7 @@ switch:
         lambda: !lambda |-
           id(${device_name}climate).set_display_state(false);
   
-  # Светодиодная индикация обмена данными с кондиционером, по умолчанию выключена
+  # The LED indicator for data exchange with the air conditioner is off by default.
   - name: Display on module
     platform: template
     device_class: switch
@@ -195,9 +195,9 @@ switch:
         lambda: !lambda |-
           id(${device_name}climate).set_force_mode_state(false);
 
-# - Выпадающие списки
+# - Dropdown lists
 select:
-  # Настройка вертикального качания
+  # Adjusting the vertical swing
   - platform: template
     name: Vertical swing
     id: vswing
@@ -219,7 +219,7 @@ select:
             id(${device_name}climate).set_vertical_swing_direction(esphome::tclac::VerticalSwingDirection::DOWNSIDE);
           }
 
-  # Настройка горизонтального качания
+  # Horizontal swing adjustment
   - platform: template
     name: Horizontal swing
     id: hswing
@@ -244,7 +244,7 @@ select:
             id(${device_name}climate).set_horizontal_swing_direction(esphome::tclac::HorizontalSwingDirection::RIGHTSIDE);
           }
 
-  # Настройка фиксации вертикальной заслонки
+  # Set the vertical louver position.
   - platform: template
     name: Vertical fixing
     id: vfixing
@@ -275,7 +275,7 @@ select:
             id(${device_name}climate).set_vertical_airflow(esphome::tclac::AirflowVerticalDirection::MAX_DOWN);
           }
 
-  # Настройка фиксации горизонатальных заслонок
+  # Set horizontal louver position
   - platform: template
     name: Horizontal fixing
     id: hfixing
