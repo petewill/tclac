@@ -1,7 +1,8 @@
 # 🌀 TCL Air Conditioner Integration for Home Assistant
 
-> EN Translated with Google – successfully tested with **Rovsun TSC-09HA1/I3XI22B-I (indoor) & TSC-09HA1/I3XI22B-O (outdoor) **
-> Simple DIY project with ESP32 + USB cable. No cloud required.
+Note: I modified sorz's code to work with my Rovsun unit. 
+EN Translated with Google – successfully tested with **Rovsun TSC-09HA1/I3XI22B-I (indoor) & TSC-09HA1/I3XI22B-O (outdoor) **
+Simple DIY project with ESP32 + USB cable. No cloud required.
 
 ---
 
@@ -70,10 +71,7 @@
 
 These models have been successfully tested:
 
-- **TCL:** TAC-07CHSA / TAC-09CHSA / TAC-12CHSA / TAC-12CHDA
-- **Daichi:** AIR20AVQ1, AIR25AVQS1R-1, DA35EVQ1-1
-- **Axioma:** ASX09H1 / ASB09H1
-- **Dantex:** RK-12SATI / RK-12SATIE
+- Rovsun TSC-09HA1/I3XI22B-I (indoor) & TSC-09HA1/I3XI22B-O (outdoor)
 - ...and similar models
 
 ⚠️ **Note:**

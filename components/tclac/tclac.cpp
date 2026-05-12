@@ -354,14 +354,15 @@ void tclacClimate::takeControl() {
 			break;
 	}
 	
-	// We are setting the louver oscillation mode.
+
+		// We are setting the louver oscillation mode.
 	switch(switch_swing_mode) {
 		case climate::CLIMATE_SWING_OFF:
 			dataTX[10]	+= 0b00000000;
 			dataTX[11]	+= 0b00000000;
 			break;
 		case climate::CLIMATE_SWING_VERTICAL:
-			dataTX[10]	+= 0b00111000;
+			dataTX[10]	+= 0b00100110;
 			dataTX[11]	+= 0b00000000;
 			break;
 		case climate::CLIMATE_SWING_HORIZONTAL:
@@ -369,11 +370,11 @@ void tclacClimate::takeControl() {
 			dataTX[11]	+= 0b00001000;
 			break;
 		case climate::CLIMATE_SWING_BOTH:
-			dataTX[10]	+= 0b00111000;
+			dataTX[10]	+= 0b00100110;
 			dataTX[11]	+= 0b00001000;  
 			break;
 	}
-	
+
 	// We are setting the air conditioner presets.
 	switch(switch_preset) {
 		case ClimatePreset::CLIMATE_PRESET_NONE:
@@ -389,38 +390,7 @@ void tclacClimate::takeControl() {
 			break;
 	}
 
-        //Режим заслонок
-		//	Вертикальная заслонка
-		//		Качание вертикальной заслонки [10 байт, маска 00111000]:
-		//			000 - Качание отключено, заслонка в последней позиции или в фиксации
-		//			111 - Качание включено в выбранном режиме
-		//		Режим качания вертикальной заслонки (режим фиксации заслонки роли не играет, если качание включено) [32 байт, маска 00011000]:
-		//			01 - качание сверху вниз, ПО УМОЛЧАНИЮ
-		//			10 - качание в верхней половине
-		//			11 - качание в нижней половине
-		//		Режим фиксации заслонки (режим качания заслонки роли не играет, если качание выключено) [32 байт, маска 00000111]:
-		//			000 - нет фиксации, ПО УМОЛЧАНИЮ
-		//			001 - фиксация вверху
-		//			010 - фиксация между верхом и серединой
-		//			011 - фиксация в середине
-		//			100 - фиксация между серединой и низом
-		//			101 - фиксация внизу
-		//	Горизонтальные заслонки
-		//		Качание горизонтальных заслонок [11 байт, маска 00001000]:
-		//			0 - Качание отключено, заслонки в последней позиции или в фиксации
-		//			1 - Качание включено в выбранном режиме
-		//		Режим качания горизонтальных заслонок (режим фиксации заслонок роли не играет, если качание включено) [33 байт, маска 00111000]:
-		//			001 - качание слева направо, ПО УМОЛЧАНИЮ
-		//			010 - качание слева
-		//			011 - качание по середине
-		//			100 - качание справа
-		//		Режим фиксации горизонтальных заслонок (режим качания заслонок роли не играет, если качание выключено) [33 байт, маска 00000111]:
-		//			000 - нет фиксации, ПО УМОЛЧАНИЮ
-		//			001 - фиксация слева
-		//			010 - фиксация между левой стороной и серединой
-		//			011 - фиксация в середине
-		//			100 - фиксация между серединой и правой стороной
-		//			101 - фиксация справа
+
 		// louver Mode
 		// Vertical louver
 		// Vertical louver swing [10 bytes, mask 00111000]:
@@ -453,7 +423,7 @@ void tclacClimate::takeControl() {
 		// 100 - locking between the middle and the right side
 		// 101 - locking on the right
 		
-		
+
 	// We are setting the mode for swinging the vertical louver.
 	switch(vertical_swing_direction_) {
 		case VerticalSwingDirection::UP_DOWN:
@@ -461,14 +431,15 @@ void tclacClimate::takeControl() {
 			ESP_LOGD("TCL", "Vertical swing: up-down");
 			break;
 		case VerticalSwingDirection::UPSIDE:
-			dataTX[32]	+= 0b00010000;
+			dataTX[32]	+= 0b00001010;
 			ESP_LOGD("TCL", "Vertical swing: upper");
 			break;
 		case VerticalSwingDirection::DOWNSIDE:
-			dataTX[32]	+= 0b00011000;
-			ESP_LOGD("TCL", "Vertical swing: downer");
+			dataTX[32]	+= 0b00010010;
+			ESP_LOGD("TCL", "Vertical swing: lower");
 			break;
 	}
+
 	// We are setting the mode for swinging the horizontal louvers.
 	switch(horizontal_swing_direction_) {
 		case HorizontalSwingDirection::LEFT_RIGHT:
@@ -476,15 +447,15 @@ void tclacClimate::takeControl() {
 			ESP_LOGD("TCL", "Horizontal swing: left-right");
 			break;
 		case HorizontalSwingDirection::LEFTSIDE:
-			dataTX[33]	+= 0b00010000;
+			dataTX[33]	+= 0b00001010;
 			ESP_LOGD("TCL", "Horizontal swing: lefter");
 			break;
 		case HorizontalSwingDirection::CENTER:
-			dataTX[33]	+= 0b00011000;
+			dataTX[33]	+= 0b00010010;
 			ESP_LOGD("TCL", "Horizontal swing: center");
 			break;
 		case HorizontalSwingDirection::RIGHTSIDE:
-			dataTX[33]	+= 0b00100000;
+			dataTX[33]	+= 0b01010000;
 			ESP_LOGD("TCL", "Horizontal swing: righter");
 			break;
 	}

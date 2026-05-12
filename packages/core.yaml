@@ -7,7 +7,8 @@ external_components:
   - source:
       url: https://github.com/I-am-nightingale/tclac.git
       type: git
-      ref: master
+      #ref: master
+      ref: ca14e8da83abad0c46715527a4cb7afe0a7ba4a2 #commit ca14e8d ( Nov 29, 2025)
     components: [ tclac ]
     refresh: 30s
 
